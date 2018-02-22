@@ -17,9 +17,11 @@ RUN npm i webpack
 RUN git clone https://github.com/GoogleChrome/puppeteer
 WORKDIR /home/puser/node_modules/puppeteer
 RUN npm i .
-# Go to examples folder
-WORKDIR /home/puser/node_modules/puppeteer/examples
-# Add no-sandbox argument
-RUN perl -p -i -e "s/puppeteer.launch\(\)/puppeteer.launch({args: ['--no-sandbox']})/" *
-CMD echo 'eg: node pdf.js' && bash
+#Clone my project
+RUN mkdir -p /home/puser/ban
+WORKDIR /home/puser/ban
+RUN git clone https://github.com/seriouslyfluffy/no-ban-for-me
+WORKDIR /home/puser/ban/no-ban-for-me
+RUN npm i
+RUN npm start
 
