@@ -7,16 +7,6 @@ RUN apt-get install -y nodejs
 # Create non-root user
 RUN useradd -m puser
 USER puser
-# Create node modules folder and set NODE_PATH environment variable
-RUN mkdir -p /home/puser/node_modules
-ENV NODE_PATH /home/puppeteer/node_modules
-WORKDIR /home/puser/node_modules
-# Install webpack (dep of puppeteer)
-RUN npm i webpack
-# Clone and install puppeteer
-RUN git clone https://github.com/GoogleChrome/puppeteer
-WORKDIR /home/puser/node_modules/puppeteer
-RUN npm i .
 #Clone my project
 RUN mkdir -p /home/puser/ban
 WORKDIR /home/puser/ban
